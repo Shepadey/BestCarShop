@@ -1,6 +1,9 @@
 from urllib import request
 from django.shortcuts import render
 def main (request): 
-    return render(request,'main.html')
+    names = ["Alexandr","Vasiliy","Pavel","Andrey","Dmitriy"]
+    return render(request,'main.html',{"names":names})
+
+
 
 # Create your views here.
