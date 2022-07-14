@@ -1,8 +1,9 @@
+from core.models import Example
 from urllib import request
 from django.shortcuts import render
 def main (request): 
-    names = ["Alexandr","Vasiliy","Pavel","Andrey","Dmitriy"]
-    return render(request,'main.html',{"names":names})
+    items = Example.objects.all()
+    return render(request,'main.html',{"items":items})
 
 
 
