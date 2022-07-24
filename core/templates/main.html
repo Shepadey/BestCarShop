@@ -1,6 +1,7 @@
  {% extends "base.html" %}
 
  {% block content %}
+<script src="js/index.js"> </script>
 
  <form action ="" method ="post">
    {% csrf_token %}
@@ -20,5 +21,7 @@
   {% endif %}
 
 {% endfor %}
+
+<button type="submit" class="testButton">Test</button>
 
 {% endblock %}

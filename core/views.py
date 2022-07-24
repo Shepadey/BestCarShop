@@ -1,4 +1,5 @@
 
+from django.http import JsonResponse
 from core.forms import ExampleForm
 from core.models import Example
 from urllib import request
@@ -20,6 +21,13 @@ def form(request):
             form.save()
             return redirect('main')
     return render(request,'add.html',{'forms':forms})
+def get_items(request):
+    return JsonResponse({'info':'Фильтр работает'})
+
+def search_items(request):
+    return JsonResponse({'info':'Поиск работает'})
+
+
     
 
 
