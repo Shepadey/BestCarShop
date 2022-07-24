@@ -15,7 +15,9 @@
   <h1>{{ item.color }}</h1>
   <h1>{{ item.cost }}</h1>
 
-  <img src='{{ item.image.url }}' alt=''>
+  {% if item.image %}
+      <img src="{{ item.image.url }}">
+  {% endif %}
 
 {% endfor %}
 
