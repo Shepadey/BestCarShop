@@ -12,7 +12,22 @@
 
 <body>
 
-<h1>  список автомобилей </h1>
+<div class ="nav-menu">
+    <div class = "container">
+        <a href="" class="logo">CarShop</a>
+        <div class= "navigators">
+            <a href="" class="nav-item">Cars</a>
+            <a href =""class="nav-item">All</a>
+            <a href ="" class= "nav-item">Registration</a>
+            <form action ="" method ="post">
+                {% csrf_token %}
+                <input type="nomber" name ="first" placeholder = "form">
+                <input type="number" name="second" palceholder = "to">
+                <button type="submit">Получить</button>
+            </form>
+        </div>
+    </div>
+</div>    
 {% block content %}
 
  {% endblock %}

@@ -3,23 +3,24 @@
  {% block content %}
 <script src="js/index.js"> </script>
 
- <form action ="" method ="post">
-   {% csrf_token %}
-   <input type="nomber" name ="first" placeholder = "form">
-   <input type="number" name="second" palceholder = "to">
-   <button type="submit">Получить</button>
- </form>
+ 
 
 {% for item in items %}
+<div class="card">
 
-  <h1>{{ item.name }}</h1>
-  <h1>{{ item.color }}</h1>
-  <h1>{{ item.cost }}</h1>
 
-  {% if item.image %}
+ {% if item.image %}
       <img src="{{ item.image.url }}">
   {% endif %}
+  <div class="container">
 
+    <p>{{ item.name }}</p>
+    <p>{{ item.color }}</p>
+    <p>{{ item.cost }}</p>
+
+ 
+  </div>
+</div>
 {% endfor %}
 
 <button type="submit" class="testButton">Test</button>
