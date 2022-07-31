@@ -16,7 +16,7 @@ img{
     margin: 0 auto;
 }
 .nav-menu{
-    background-color:#747474 ;
+    background: color #747474; ;
     width: 100%;
     height: 80px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
@@ -37,7 +37,6 @@ img{
 }
 body{
     background:linear-gradient(#747474, #000) fixed;
-    
 }
 .card{
     margin-top: 10%;
@@ -59,3 +58,5 @@ body{
 .card,image{
     height: 10%;
 }
+
+      
