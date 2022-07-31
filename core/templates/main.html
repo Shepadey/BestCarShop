@@ -1,17 +1,22 @@
  {% extends "base.html" %}
 
  {% block content %}
-<script src="js/index.js"> </script>
+
 
  
 
 {% for item in items %}
 <div class="card">
 
+<div class="flipCard">
 
- {% if item.image %}
-      <img src="{{ item.image.url }}">
+  {% if item.image %}
+      <img class="front-face" src="{{ item.image.url }}">
   {% endif %}
+  {% if item.image_second %}
+      <img class="back-face" src="{{ item.image_second.url }}">
+  {% endif %}
+</div>
   <div class="container">
 
     <p>{{ item.name }}</p>

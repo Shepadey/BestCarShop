@@ -5,6 +5,7 @@ class Example(models.Model):
     color = models.CharField(max_length=120)
     cost = models.IntegerField()
     image= models.ImageField(blank=True)
+    image_second= models.ImageField(blank=True)
 
     def __str__(self) :
         return self.name
