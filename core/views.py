@@ -12,7 +12,9 @@ def main (request):
         return render(request,'main.html',{"items":items})
     else:
         items = Example.objects.all()
-        return render(request,'main.html',{"items":items})
+        min_price = Examole.objects.all().aggregate(Min('coast'))
+        max_price = Example.objects.all().aggregate(Max('coast'))
+        return render(request,'main.html',{"items":items,"min_price":min_price,"max_price":max_price})
 def form(request):
     forms =ExampleForm()
     if request.method == "POST":
@@ -25,6 +27,7 @@ def get_items(request):
     return JsonResponse({'info':'Фильтр работает'})
 
 def search_items(request):
+    print(request.GET)
     return JsonResponse({'info':'Поиск работает'})
 
 

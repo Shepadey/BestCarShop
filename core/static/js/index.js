@@ -1,17 +1,18 @@
-let testButton = document.querySelector( selectors: '.testButton' )
-const cards = document.querySelectorAll('.flipCard');
-function flipCard(event){
-    event.target.parentElement.classList.tooggle('flip');  
-    
+let testButton = document.getElementById(  'testButton' )
+console.log(testButton)
 
-ards.forEach(card => card.addEventListener('click',flipCard));
-}
+testButton.addEventListener('click',function (event){
+    event.preventDefault()
 
-
-
-testButton.addEventListener(type: 'click', listener: function (event:Event){
 let url= 'http://127.0.0.1:8000/search-items';
-axios.get(url).then(function(response){
+axios.get(url,{
+    params:{
+        'one':1,
+        'two':2,
+        'three':3,
+    }
+}).then(function(response){
+    
     console.log(response);
     })
 })
