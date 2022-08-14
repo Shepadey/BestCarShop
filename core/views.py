@@ -4,17 +4,19 @@ from core.forms import ExampleForm
 from core.models import Example
 from urllib import request
 from django.shortcuts import redirect, render
+from django.db.models import  Max, Min
 def main (request): 
     if request.method =='POST':
-        from_number = request.POST.get('first')
-        to_number = request.POST.get('second')
-        items = Example.objects.filter(cost__range=(from_number, to_number))
-        return render(request,'main.html',{"items":items})
+        if request.is_valid():
+            from_number = request.POST.get('first')
+            to_number = request.POST.get('second')
+            items = Example.objects.filter(cost__range=(from_number, to_number))
+            return render(request,'main.html',{"items":items})
     else:
         items = Example.objects.all()
-        min_price = Examole.objects.all().aggregate(Min('coast'))
-        max_price = Example.objects.all().aggregate(Max('coast'))
-        return render(request,'main.html',{"items":items,"min_price":min_price,"max_price":max_price})
+        min_cost = Example.objects.all().aggregate(Min('cost'))
+        max_cost = Example.objects.all().aggregate(Max('cost'))
+        return render(request,'main.html',{"items":items,"min_cost":min_cost,"max_cost":max_cost})
 def form(request):
     forms =ExampleForm()
     if request.method == "POST":

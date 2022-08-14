@@ -16,3 +16,5 @@ axios.get(url,{
     console.log(response);
     })
 })
+let inputSearch = document.getElementById( 'search_item' )
+console.log(input_search)
