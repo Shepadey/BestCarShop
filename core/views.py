@@ -7,7 +7,6 @@ from django.shortcuts import redirect, render
 from django.db.models import  Max, Min
 def main (request): 
     if request.method =='POST':
-        if request.is_valid():
             from_number = request.POST.get('first')
             to_number = request.POST.get('second')
             items = Example.objects.filter(cost__range=(from_number, to_number))
@@ -32,8 +31,20 @@ def search_items(request):
     print(request.GET)
     return JsonResponse({'info':'Поиск работает'})
 
+def search_item(request):
+    searchWord = str(request.GET.get("inputWord"))
+    items = ShopItem.object.filter(name__container=searchWord) 
+    response = {}
+    for item in items:
+        response[item.id] = {
+            'id' : item.id,
+            'name' : item.name,
+            'color' : item.color,
+            'cost' : item.cost,
+            'image' : item.image
+        }
+    print(response)
+    return JsonResponse(response)
 
     
 
-
-# Create your views here.

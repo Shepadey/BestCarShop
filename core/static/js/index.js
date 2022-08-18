@@ -16,5 +16,19 @@ axios.get(url,{
     console.log(response);
     })
 })
-let inputSearch = document.getElementById( 'search_item' )
-console.log(input_search)
+let inputSearch = document.getElementById( 'inputWord');
+console.log(inputSearch)
+inputSearch.addEventListener('input', function(event) {
+    event.preventDefault()
+
+    let inputValue = document.getElementById( 'search' ).value
+
+    axios.get('http://127.0.0.1:800/search-item/',{
+        params:{
+        searchWord:inputValue
+        }
+    })
+    .then(function(response) {
+    console.log(response)
+    })
+}).then(function)
