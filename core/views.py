@@ -17,15 +17,18 @@ def create_dict_with_items(items):
         }
 def main (request): 
     '''if request.method =='get':
-            from_number = request.GET.get('first')
-            to_number = request.GET.get('second')
-            items = Example.objects.filter(cost__range=(from_number, to_number))
-            return render(request,'main.html',{"items":items})'''
+        from_number = request.GET.get('first')
+        to_number = request.GET.get('second')
+        items = Example.objects.filter(cost__range=(0, 20000))
+        return render(request,'main.html',{"items":items})'''
+
     items = Example.objects.all()
     min_cost = Example.objects.all().aggregate(Min('cost'))
     max_cost = Example.objects.all().aggregate(Max('cost'))
-    print(min_cost)
-    print(max_cost)
+    from_number = request.GET.get('first')
+    to_number = request.GET.get('second')
+    if from_number !=None or to_number !=None:
+        items = Example.objects.filter(cost__range=(from_number, to_number))
     return render(request,'main.html',{"items":items,"min_cost":min_cost,"max_cost":max_cost})
 def form(request):
     forms =ExampleForm()
