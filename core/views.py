@@ -27,7 +27,7 @@ def main (request):
     max_cost = Example.objects.all().aggregate(Max('cost'))
     from_number = request.GET.get('first')
     to_number = request.GET.get('second')
-    if from_number !=None or to_number !=None:
+    if (from_number !=None or to_number !=None) and (from_number != '' or to_number !=''):
         items = Example.objects.filter(cost__range=(from_number, to_number))
     return render(request,'main.html',{"items":items,"min_cost":min_cost,"max_cost":max_cost})
 def form(request):
@@ -53,7 +53,8 @@ def search_items(request):
 
 def search_item(request):
     searchWord = str(request.GET.get("inputWord"))
-    items = Example.object.filter(name__container=searchWord) 
+    items = Example.object.filter(name__containes=searchWord) 
+    print(items)
     return JsonResponse(create_dict_with_items(items))
 
     
