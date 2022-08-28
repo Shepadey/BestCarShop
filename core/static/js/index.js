@@ -1,16 +1,5 @@
 
-let inputSearch = document.getElementById( 'inputWord');
-console.log(inputSearch)
-inputSearch.addEventListener('input', function(event) {
-    event.preventDefault()
-
-    let inputValue = document.getElementById( 'search' ).value
-
-axios.get('http://127.0.0.1:800/search-item/',{
-        params:{
-        searchWord:inputValue
-        }
-}).then(function(response) {
+function createHtmlItems(response) {
     let allItems=document.querySelectorAll('.item')
     allItems.forEach(item=>item.remove())
 
@@ -36,6 +25,34 @@ axios.get('http://127.0.0.1:800/search-item/',{
         div.appendChild(h3)
 
         document.querySelector('.items').appendChild(div)
+
+    
     }
+}
+let btnFilter = document.getElementById('btn-filter')
+let inputSearch = document.getElementById('searchWord')
+
+btnFilter.addEventListener('click', function(event) {
+    let fromInput = dcument.querySelector('.from')
+    let toInput = document.querySelector('.to')
+    event.preventDefault()
+
+    axios.get('http://127.0.0.1:800/search-items/',{
+        params:{
+        from: fromInput.value,
+        to: toInput.value
+        }
+    }).then(createHtmlItems(response))
 })
+
+inputSearch.addEventListener('input',function(event) {
+    event.preventDefault()
+
+    let inputValue = document.getElementById('searchWord').value
+    console.log(inputValue)
+    axios.get('http://127.0.0.1:800/search-item/',{
+        params:{
+            searchWord: inputValue
+        }
+    }).then(createHtmlItems(response))
 })

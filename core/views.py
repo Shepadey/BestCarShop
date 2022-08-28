@@ -13,8 +13,9 @@ def create_dict_with_items(items):
             'name' : item.name,
             'color' : item.color,
             'cost' : item.cost,
-            'image' : item.image
+            'image' : item.image.url
         }
+    return response
 def main (request): 
     '''if request.method =='get':
         from_number = request.GET.get('first')
@@ -52,7 +53,7 @@ def search_items(request):
     return JsonResponse({'info':'Поиск работает'})
 
 def search_item(request):
-    searchWord = str(request.GET.get("inputWord"))
+    searchWord = str(request.GET.get("searchWord"))
     items = Example.object.filter(name__containes=searchWord) 
     print(items)
     return JsonResponse(create_dict_with_items(items))
