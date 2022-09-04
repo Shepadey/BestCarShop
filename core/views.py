@@ -1,10 +1,12 @@
 
+from re import search
 from django.http import JsonResponse
 from core.forms import ExampleForm
 from core.models import Example
 from urllib import request
 from django.shortcuts import redirect, render
 from django.db.models import  Max, Min
+from django.db.models import Q
 def create_dict_with_items(items):
     response = {}
     for item in items:
@@ -16,21 +18,20 @@ def create_dict_with_items(items):
             'image' : item.image.url
         }
     return response
-def main (request): 
-    '''if request.method =='get':
+def main (request):
+    search_port = request.GET.get('search') 
+    if search_port:
+        items = Example.objects.filter(Q(name__icontains=search_port))
+        return render(request,'main.html',{"items":items})
+    else:
+        items = Example.objects.all()
+        min_cost = Example.objects.all().aggregate(Min('cost'))
+        max_cost = Example.objects.all().aggregate(Max('cost'))
         from_number = request.GET.get('first')
         to_number = request.GET.get('second')
-        items = Example.objects.filter(cost__range=(0, 20000))
-        return render(request,'main.html',{"items":items})'''
-
-    items = Example.objects.all()
-    min_cost = Example.objects.all().aggregate(Min('cost'))
-    max_cost = Example.objects.all().aggregate(Max('cost'))
-    from_number = request.GET.get('first')
-    to_number = request.GET.get('second')
-    if (from_number !=None or to_number !=None) and (from_number != '' or to_number !=''):
-        items = Example.objects.filter(cost__range=(from_number, to_number))
-    return render(request,'main.html',{"items":items,"min_cost":min_cost,"max_cost":max_cost})
+        if (from_number !=None or to_number !=None) and (from_number != '' or to_number !=''):
+            items = Example.objects.filter(cost__range=(from_number, to_number))
+        return render(request,'main.html',{"items":items,"min_cost":min_cost,"max_cost":max_cost})
 def form(request):
     forms =ExampleForm()
     if request.method == "POST":
